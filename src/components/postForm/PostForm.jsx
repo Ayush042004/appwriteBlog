@@ -28,8 +28,8 @@ import { useSelector } from 'react-redux';
         appwriteService.deleteFile(post.featuredImage);
       }
 
-      //update post with slug and spreading the data 
 
+      //update post with slug and spreading the data 
       const dbPost = await appwriteService.updatePost(post.$id, {
         ...data,
         featuredImage: file ? file.$id : undefined,
@@ -39,6 +39,7 @@ import { useSelector } from 'react-redux';
         navigate(`/post/${dbPost.$id}`);
       }
     } 
+    
   // this is scenario 2 creating a new post 
     else {
       const file = await appwriteService.uploadFile(data.image[0]);
@@ -68,6 +69,7 @@ import { useSelector } from 'react-redux';
          },[]);
 
         // we used useEffect in this update the slug dynamically and sets up watch subscription
+        //watch is the function in the react hook form to listens to the changes in the form
         useEffect(() => {
           const subscription = watch((value, {name}) => {
             if (name === "title") {
@@ -76,35 +78,35 @@ import { useSelector } from 'react-redux';
             }
           });
 
-          return () => subscription.unsubscribe();
+          return () => subscription.unsubscribe(); //cleanup function for useeffect hook unsubscribe the subscription of watch listener.
         }, [watch, slugTransform, setValue]);
 
 
         return (
-          <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-              <div className="w-2/3 px-2">
+          <form onSubmit={handleSubmit(submit)} className="flex flex-wrap  shadow-lg rounded-lg p-6 md:p-10 "> 
+              <div className=" w-full md:w-2/3 px-2">
                   <Input
                       label="Title :"
                       placeholder="Title"
-                      className="mb-4"
+                      className="mb-4 border border-gray-300 rounded-lg  focus:outline-none focus:ring-2 focus:ring-blue-500"
                       {...register("title", { required: true })}
                   />
                   <Input
                       label="Slug :"
                       placeholder="Slug"
-                      className="mb-4"
+                      className="mb-4 border border-gray-300 rounded-lg  focus:outline-none focus:ring-2 focus:ring-blue-500"
                       {...register("slug", { required: true })}
                       onInput={(e) => {
                           setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                       }}
                   />
-                  <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+                  <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")}  className="flex mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
-              <div className="w-1/3 px-2">
+              <div className=" w-full md:w-1/3 px-2">
                   <Input
                       label="Featured Image :"
                       type="file"
-                      className="mb-4"
+                      className="mb-4 border border-gray-300 rounded-lg  focus:outline-none focus:ring-2 focus:ring-blue-500 "
                       accept="image/png, image/jpg, image/jpeg, image/gif"
                       {...register("image", { required: !post })}
                   />
@@ -113,14 +115,14 @@ import { useSelector } from 'react-redux';
                           <img
                               src={appwriteService.getFilePreview(post.featuredImage)}
                               alt={post.title}
-                              className="rounded-lg"
+                              className="rounded-lg shadow-md w-full object-cover"
                           />
                       </div>
                   )}
                   <Select
                       options={["active", "inactive"]}
                       label="Status"
-                      className="mb-4"
+                      className="mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       {...register("status", { required: true })}
                   />
                   <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
