@@ -68,13 +68,14 @@ function Login() {
                 label="Password: "
                 type="password"
                 placeholder="Enter your password"
+                className="w-full block border rounded-md focus:outline-none focus:ring focus:ring-primary-light"
                 {...register("password", {
                     required: true,
                 })}
                 />
                 <Button
                 type="submit"
-                className="w-full"
+                className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200 "
                 >Sign in</Button>
             </div>
         </form>
