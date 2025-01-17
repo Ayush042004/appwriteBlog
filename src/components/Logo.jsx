@@ -1,9 +1,10 @@
 import React from "react";
-import logo from "../assets/logo.png"
+import logo from "../assets/logo1_bg.png";
 // here we are gonna add our logo which we are gonna use later anywhere 
 function Logo({width = '100px'}) {
     return (
-        <img src={logo} alt="logo" style={{width}}/>
+        <img src={logo} alt="logo"
+         style={{width}}/>
     );
 }
 

@@ -41,7 +41,7 @@ function Header() {
         },
     ]
     return (
-        <header className='shadow bg-gray-500 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 text-white'>
+        <header className='shadow bg-gray-500 bg-gradient-to-r from-gray-600 via-gray-800 to-gray-900 text-white'>
             <Container>
                 <nav className='flex items-center justify-between flex-wrap py-4 '>
                     <div className='mr-4 flex items-center'> 
