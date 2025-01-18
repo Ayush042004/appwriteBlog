@@ -51,7 +51,7 @@ function Header() {
                     </div>
                   
 
-                    <ul className='flex ml-auto items-center  space-x-4'>
+                    <ul className='flex ml-auto  flex-wrap items-center  space-x-4'>
                         {navItems.map((item)=> item.active ? (
                             <li key={item.name}>
                               <button
@@ -63,7 +63,7 @@ function Header() {
                     )}
 
                     {authStatus && (  // agr autheticated ho toh logout button 
-                        <li>
+                        <li className='w-full max-w-xs sm:w-auto '>
                             <LogoutBtn/>
                         </li>
                     )}
